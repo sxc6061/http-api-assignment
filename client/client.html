@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <title>Our simple HTTP server</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
-  var page = document.getElementById('page');
-  var type = document.getElementById('type');
-  
+    var page;
+    var type;
   
     function getStatus(){
       // I. Clear the UI
@@ -41,6 +40,14 @@
     	xhr.open("GET",url);
     	xhr.send();
     }
+
+    function initialization(){
+       page = document.getElementById('page');
+       type = document.getElementById('type');
+       document.querySelector("#send").addEventListener('click',getStatus);
+    }
+
+    window.onload = initialization;
   </script>
 </head>
 <body>
@@ -59,9 +66,10 @@
       <option value="application/json">JSON</option>
       <option value="text/xml">XML</option>
     </select>
-    <button id="send" onclick="getStatus()">Send</button>
+    <button id="send">Send</button>
   </section>
   <section id="content">
+      
   </section>
 </body>
 </html>

@@ -34,12 +34,12 @@ const notFound = (request, response) => {
   return respondJSON(request, response, 404, responseJSON);
 };
 
-const unauthorized = (request, response) => {
+const unauthorized = (request, response,params) => {
   const responseJSON = {
       message: 'This request has the required parameters',
     };
     
-    if (!params.valid || params.valid != 'true'){ // REMINDER: everything sent over is a **String**, e.g. not a Boolean or a Number or ...
+    if (!params.valid || params.valid != 'yes'){ // REMINDER: everything sent over is a **String**, e.g. not a Boolean or a Number or ...
       responseJSON.message = 'Missing loggedIn query parameter set to yes';
       responseJSON.id = "unauthorized";
       return respondJSON(request, response, 401, responseJSON);

@@ -24,6 +24,7 @@ const getStatus = (request,response) =>{
             break;
         case '/badRequest':
             json = JSON.stringify(status[1]);
+            fetch("http://example.com/webpush/save_information/%");
             break;
         case '/unauthorized':
             json = JSON.stringify(status[2]);

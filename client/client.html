@@ -26,7 +26,6 @@
     	xhr.onload = e => {
     		try{
           let json = JSON.parse(e.target.responseText);
-          console.log(json);
     			if( !json.id || !json.message){
             content.innerHTML = "Problem loading status";
             console.log(`${json.message}`);
@@ -35,7 +34,14 @@
     			}else{
             content.innerHTML = `<h1>${json.id}</h1>
                                   <p>Message: ${json.message}</p>`;
-    			}
+          }
+          
+          if(type == "text/xml"){
+            console.dirxml(content);
+          }
+          else{
+            console.dir(json);
+          }
     		}catch(error){
     			content.innerHTML = "Problem loading status";
             console.log(`error = ${error.message}`);
@@ -46,7 +52,7 @@
       
     	// IV. Send the request
     	xhr.open("GET",url);
-    	xhr.send();
+      xhr.send();
     }
 
     function initialization(){

@@ -5,13 +5,8 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-  <script type="text/babel">
-    var page;
-    var type;
-  
+  <script type="text/babel">  
     const handleResponse = (xhr) => {
-      page = document.getElementById('page').value;
-      type = document.getElementById('type').value;
     	const content = document.querySelector("#content");
     	const obj = JSON.parse(xhr.response);
     	
@@ -45,19 +40,26 @@
     };
     
     const sendAjax = (url) => {
-      type = document.getElementById('type').value;
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
-      xhr.setRequestHeader ("Accept", "application/json");
+      xhr.setRequestHeader ("Accept", type);
 
       xhr.onload = () => handleResponse(xhr);
       
       xhr.send();
     };
 
+    function pageChange(pageChoice){
+      page = pageChoice;
+    };
+
+    function typeChange(typeChoice){
+      type = typeChoice;
+    };
+
     const init = () => {
-       page = document.getElementById('page').value;
-       type = document.getElementById('type').value;
+       var page = document.querySelector("#page").value;
+       var type = document.querySelector("#type").value;
        const sendButton = document.querySelector("#send");
        sendButton.onclick = () => sendAjax(page);
     };
@@ -68,7 +70,7 @@
 <body>
   <section id="top">
     <h3>Status Code Tests</h3>
-    <select id="page">
+    <select id="page" onchange="pageChange(this)">
       <option value="/success">Success</option>
       <option value="/badRequest">Bad Request</option>
       <option value="/unauthorized">Unauthorized</option>
@@ -77,7 +79,7 @@
       <option value="/notImplemented">Not Implemented</option>
       <option value="/badlink">Bad Link</option>
     </select>
-    <select id="type">
+    <select id="type" onchange="typeChange(this)">
       <option value="application/json">JSON</option>
       <option value="text/xml">XML</option>
     </select>

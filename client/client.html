@@ -43,8 +43,6 @@
     };
     
     const sendAjax = (url) => {
-      page = document.querySelector("#page").value
-      type = document.querySelector("#type").value
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
       xhr.setRequestHeader ("Accept", "application/json");
@@ -53,10 +51,16 @@
       
       xhr.send();
     };
+    
+    function pageChange() {
+      page = document.querySelector("#page").value;
+    }
+
+    function typeChange() {
+      type = document.querySelector("#type").value;
+    }
 
     const init = () => {
-       page = document.querySelector("#page").value;
-       type = document.querySelector("#type").value;
        const sendButton = document.querySelector("#send");
        sendButton.onclick = () => sendAjax(page);
     };
@@ -67,7 +71,7 @@
 <body>
   <section id="top">
     <h3>Status Code Tests</h3>
-    <select id="page">
+    <select id="page" onchange="pageChange()">
       <option value="/success">Success</option>
       <option value="/badRequest">Bad Request</option>
       <option value="/unauthorized">Unauthorized</option>
@@ -76,7 +80,7 @@
       <option value="/notImplemented">Not Implemented</option>
       <option value="/badlink">Bad Link</option>
     </select>
-    <select id="type">
+    <select id="type" onchange="typeChange()">
       <option value="application/json">JSON</option>
       <option value="text/xml">XML</option>
     </select>

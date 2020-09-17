@@ -16,6 +16,7 @@
       content.innerHTML = `<h1>Loading Status</h1>
                             <p>Please wait...</p>`;
       
+      
     	// II. Set up the XHR request
       const url = "https://cho-http-api.herokuapp.com" + page;
       console.log(url);
@@ -25,6 +26,7 @@
     	xhr.onload = e => {
     		try{
           let json = JSON.parse(e.target.responseText);
+          console.log(json);
     			if( !json.id || !json.message){
             content.innerHTML = "Problem loading status";
             console.log(`${json.message}`);
@@ -32,7 +34,7 @@
     				console.log(`error = ${error.message}`);
     			}else{
             content.innerHTML = `<h1>${json.id}</h1>
-                                  <p>${json.message}</p>`;
+                                  <p>Message: ${json.message}</p>`;
     			}
     		}catch(error){
     			content.innerHTML = "Problem loading status";

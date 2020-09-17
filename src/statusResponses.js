@@ -2,13 +2,13 @@ const http = require('http');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const status = [
-    {"id" : "Success", "message" : "Message: This is a successful response"},
-    {"id" : "Bad Request","message" : "Message: Missing vlaid query parameter set to true"},
-    {"id" : "Unauthorized","message" : "Message: Missing loggedIn query parameter set to yes"},
-    {"id" : "Forbidden","message" : "Message: You do not have access to this content"},
-    {"id" : "Internal Server Error","message" : "Message: Internal Server Error. Something went wrong."},
-    {"id" : "Not Implemented","message" : "Message: A get request for this page has not been implemented yet. Check again later for updated content."},
-    {"id" : "Resource Not Found","message" : "Message: The page you are looking for was not found"}
+    {"id" : "Success", "message" : "This is a successful response"},
+    {"id" : "Bad Request","message" : "Missing vlaid query parameter set to true"},
+    {"id" : "Unauthorized","message" : "Missing loggedIn query parameter set to yes"},
+    {"id" : "Forbidden","message" : "You do not have access to this content"},
+    {"id" : "Internal Server Error","message" : "Internal Server Error. Something went wrong."},
+    {"id" : "Not Implemented","message" : "A get request for this page has not been implemented yet. Check again later for updated content."},
+    {"id" : "Resource Not Found","message" : "The page you are looking for was not found"}
 ];
 
 const getBadReq = (request,response) =>{
@@ -24,19 +24,6 @@ const getStatus = (request,response) =>{
             break;
         case '/badRequest':
             json = JSON.stringify(status[1]);
-            fetch('url')
-            .then(response => Promise.all([response.ok, response.json()]))
-            .then(([responseOk, body]) => {
-                if (responseOk) {
-                // handle success case
-                } else {
-                throw new Error(body);
-                }
-            })
-            .catch(error => {
-                // catches error case and if fetch itself rejects
-                console.log(error.message);
-            });
             break;
         case '/unauthorized':
             json = JSON.stringify(status[2]);

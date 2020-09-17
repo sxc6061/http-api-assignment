@@ -12,7 +12,12 @@
     const handleResponse = (xhr) => {
     	const content = document.querySelector("#content");
     	const obj = JSON.parse(xhr.response);
-    	console.dir(obj);
+      if(type == "application/json"){
+        console.dir(obj);
+      }
+      else{
+        console.dirxml(obj);
+      }
     	switch(xhr.status){
     		case 200:
     			content.innerHTML = '<b>Success</b>';

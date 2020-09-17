@@ -1,0 +1,29 @@
+{
+  "name": "http-api-assignment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server.js",
+    "nodemon": "nodemon --watch ./src ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxc6061/http-api-assignment.git"
+  },
+  "keywords": [
+    "status_codes",
+    "430",
+    "igme"
+  ],
+  "author": "Steven Cho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sxc6061/http-api-assignment/issues"
+  },
+  "homepage": "https://github.com/sxc6061/http-api-assignment#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

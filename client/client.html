@@ -2,11 +2,45 @@
 <html lang="en">
 <head>
   <title>Our simple HTTP server</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
-
+  var page = document.getElementById('page');
+  var type = document.getElementById('type');
+  
+  
+    function getStatus(){
+      // I. Clear the UI
+      content.innerHTML = `<h1>Loading Status</h1>
+                            <p>Please wait...</p>`;
+      
+    	// II. Set up the XHR request
+    	const url = "https://cho-simple-web-api.herokuapp.com/" + page;
+    	const xhr = new XMLHttpRequest();
+      
+    	// III. Code that runs when the data shows up
+    	xhr.onload = e => {
+    		try{
+    			let json = JSON.parse(e.target.responseText);
+    			if( !json.status || !json.message){
+    				setup.innerHTML = "Problem loading status";
+    				console.log(`error = ${error.message}`);
+    			}else{
+            content.innerHTML = `<h1>${json.status}</h1>
+                                  <p>${json.message}</p>`;
+            console.log();
+    			}
+    		}catch(error){
+    			setup.innerHTML = "Problem loading status";
+    				console.log(`error = ${error.message}`);
+    		}
+    	};
+      
+    	// IV. Send the request
+    	xhr.open("GET",url);
+    	xhr.send();
+    }
   </script>
 </head>
 <body>
@@ -25,7 +59,7 @@
       <option value="application/json">JSON</option>
       <option value="text/xml">XML</option>
     </select>
-    <button id="send">Send</button>
+    <button id="send" onclick="getStatus()">Send</button>
   </section>
   <section id="content">
   </section>

@@ -10,6 +10,8 @@
     var type;
   
     function getStatus(){
+      page = document.getElementById('page').value;
+      type = document.getElementById('type').value;
       // I. Clear the UI
       content.innerHTML = `<h1>Loading Status</h1>
                             <p>Please wait...</p>`;

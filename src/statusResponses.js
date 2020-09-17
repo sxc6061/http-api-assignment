@@ -26,7 +26,7 @@ const getStatus = (request,response) =>{
             break;
         case '/forbidden':
             json = JSON.stringify(status[3]);
-            bre
+            break;
         case '/internal':
             json = JSON.stringify(status[4]);
             break;

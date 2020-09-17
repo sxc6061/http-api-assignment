@@ -53,10 +53,12 @@
     };
     
     const init = () => {
-       page = document.querySelector("#page").value;
        type = document.querySelector("#type").value;
        const sendButton = document.querySelector("#send");
-       sendButton.onclick = () => sendAjax(page);
+       sendButton.onclick = () => {
+          page = document.querySelector("#page").value;
+          sendAjax(page);
+       };
     };
 
     window.onload = init;

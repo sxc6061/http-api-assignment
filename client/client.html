@@ -9,59 +9,60 @@
     var page;
     var type;
   
-    function getStatus(){
+    const handleResponse = (xhr) => {
       page = document.getElementById('page').value;
       type = document.getElementById('type').value;
-      // I. Clear the UI
-      content.innerHTML = `<h1>Loading Status</h1>
-                            <p>Please wait...</p>`;
-      
-      
-    	// II. Set up the XHR request
-      const url = "https://cho-http-api.herokuapp.com" + page;
-      console.log(url);
-    	const xhr = new XMLHttpRequest();
-      
-    	// III. Code that runs when the data shows up
-    	xhr.onload = e => {
-    		try{
-          let json = JSON.parse(e.target.responseText);
-    			if( !json.id || !json.message){
-            content.innerHTML = "Problem loading status";
-            console.log(`${json.message}`);
-            console.log(`${json.id}`);
-    				console.log(`error = ${error.message}`);
-    			}else{
-            content.innerHTML = `<h1>${json.id}</h1>
-                                  <p>Message: ${json.message}</p>`;
-          }
-          
-          if(type == "text/xml"){
-            console.dirxml(content);
-          }
-          else{
-            console.dir(json);
-          }
-    		}catch(error){
-    			content.innerHTML = "Problem loading status";
-            console.log(`error = ${error.message}`);
-            console.log(`${json.message}`);
-            console.log(`${json.id}`);
-    		}
-    	};
-      
-    	// IV. Send the request
-    	xhr.open("GET",url);
-      xhr.send();
-    }
+    	const content = document.querySelector("#content");
+    	const obj = JSON.parse(xhr.response);
+    	
+    	switch(xhr.status){
+    		case 200:
+    			content.innerHTML = '<b>Success</b>';
+    			break;
+    		case 400:
+    			content.innerHTML = '<b>Bad Request</b>';
+          break;
+        case 401:
+    			content.innerHTML = '<b>Unauthorized</b>';
+          break;
+        case 403:
+    			content.innerHTML = '<b>Forbidden</b>';
+          break;
+        case 500:
+    			content.innerHTML = '<b>Internal Server Error</b>';
+          break;
+        case 503:
+    			content.innerHTML = '<b>Not Implemented</b>';
+    			break;
+    		case 404:
+    			content.innerHTML = '<b>Resource not found!</b>';
+    			break;
+    		default:
+    			content.innerHTML = `<b>Error code '${xhr.status}' not implemented by client! </b>`;
+    			break;
+    	}
+			content.innerHTML += `<p>${obj.message}</p>`;
+    };
+    
+    const sendAjax = (url) => {
+      type = document.getElementById('type').value;
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.setRequestHeader ("Accept", "application/json");
 
-    function initialization(){
+      xhr.onload = () => handleResponse(xhr);
+      
+      xhr.send();
+    };
+
+    const init = () => {
        page = document.getElementById('page').value;
        type = document.getElementById('type').value;
-       document.querySelector("#send").addEventListener('click',getStatus);
-    }
+       const sendButton = document.querySelector("#send");
+       sendButton.onclick = () => sendAjax(page);
+    };
 
-    window.onload = initialization;
+    window.onload = init;
   </script>
 </head>
 <body>
@@ -83,7 +84,6 @@
     <button id="send">Send</button>
   </section>
   <section id="content">
-      
   </section>
 </body>
 </html>

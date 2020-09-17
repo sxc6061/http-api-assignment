@@ -14,7 +14,7 @@ const urlStruct = {
   '/forbidden': statusHandler.forbidden,
   '/internal': statusHandler.internal,
   '/notImplemented': statusHandler.notImplemented,
-  '/badlink': statusHandler.notFound,
+  notFound: statusHandler.notFound,
 };
 
 const onRequest = (request, response) => {

@@ -24,7 +24,7 @@ const getStatus = (request,response) =>{
             break;
         case '/badRequest':
             json = JSON.stringify(status[1]);
-            fetch('http://abc.go.com/%')
+            fetch('url')
             .then(response => Promise.all([response.ok, response.json()]))
             .then(([responseOk, body]) => {
                 if (responseOk) {
@@ -35,6 +35,7 @@ const getStatus = (request,response) =>{
             })
             .catch(error => {
                 // catches error case and if fetch itself rejects
+                console.log(error.message);
             });
             break;
         case '/unauthorized':

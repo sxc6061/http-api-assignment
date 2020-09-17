@@ -11,6 +11,12 @@ const status = [
     {"id" : "Resource Not Found","message" : "Message: The page you are looking for was not found"}
 ];
 
+const getError = (request,response) =>{
+    response.writeHead(200, {'Content-Type': 'text/html', 'Access-Control-Allow-Origin':'*'});
+    response.write(request);
+    response.end();
+}
+
 const getStatus = (request,response) =>{
     response.writeHead(200, {'Content-Type': 'text/html', 'Access-Control-Allow-Origin':'*'});
     let json = "";
@@ -20,6 +26,7 @@ const getStatus = (request,response) =>{
             break;
         case '/badRequest':
             json = JSON.stringify(status[1]);
+            console.log(getError("http://abc.go.com/%"));
             break;
         case '/unauthorized':
             json = JSON.stringify(status[2]);

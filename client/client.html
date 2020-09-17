@@ -39,7 +39,7 @@
     			content.innerHTML = `<b>Error code '${xhr.status}' not implemented by client! </b>`;
     			break;
     	}
-			content.innerHTML += `<p>${obj.message}</p>`;
+			content.innerHTML += `<p>Message: ${obj.message}</p>`;
     };
     
     const sendAjax = (url) => {
@@ -53,10 +53,10 @@
     };
     
     const init = () => {
-       type = document.querySelector("#type").value;
        const sendButton = document.querySelector("#send");
        sendButton.onclick = () => {
           page = document.querySelector("#page").value;
+          type = document.querySelector("#type").value;
           sendAjax(page);
        };
     };

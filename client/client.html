@@ -47,7 +47,7 @@
       type = document.querySelector("#type").value
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
-      xhr.setRequestHeader ("Accept", type);
+      xhr.setRequestHeader ("Accept", "application/json");
 
       xhr.onload = () => handleResponse(xhr);
       

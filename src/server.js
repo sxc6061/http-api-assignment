@@ -7,16 +7,11 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const onRequest = (request, response) => {
   console.log(request.url);
 
-  switch (request.url) {
-    case '/':
-      htmlHandler.getIndex(request, response);
-      break;
-    case '/success':
-      statusHandler.getStatus(request,response);
-      break;
-    default:
-      htmlHandler.getIndex(request, response);
-      break;
+  if (request.url == '/'){
+    htmlHandler.getIndex(request, response);
+  }
+  else{
+    statusHandler.getStatus(request,response);
   }
 };
 

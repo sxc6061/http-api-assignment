@@ -15,24 +15,28 @@
                             <p>Please wait...</p>`;
       
     	// II. Set up the XHR request
-    	const url = "https://cho-simple-web-api.herokuapp.com/" + page;
+      const url = "https://cho-http-api.herokuapp.com" + page;
+      console.log(url);
     	const xhr = new XMLHttpRequest();
       
     	// III. Code that runs when the data shows up
     	xhr.onload = e => {
     		try{
-    			let json = JSON.parse(e.target.responseText);
-    			if( !json.status || !json.message){
-    				setup.innerHTML = "Problem loading status";
+          let json = JSON.parse(e.target.responseText);
+    			if( !json.id || !json.message){
+            content.innerHTML = "Problem loading status";
+            console.log(`${json.message}`);
+            console.log(`${json.id}`);
     				console.log(`error = ${error.message}`);
     			}else{
-            content.innerHTML = `<h1>${json.status}</h1>
+            content.innerHTML = `<h1>${json.id}</h1>
                                   <p>${json.message}</p>`;
-            console.log();
     			}
     		}catch(error){
-    			setup.innerHTML = "Problem loading status";
-    				console.log(`error = ${error.message}`);
+    			content.innerHTML = "Problem loading status";
+            console.log(`error = ${error.message}`);
+            console.log(`${json.message}`);
+            console.log(`${json.id}`);
     		}
     	};
       
@@ -42,8 +46,8 @@
     }
 
     function initialization(){
-       page = document.getElementById('page');
-       type = document.getElementById('type');
+       page = document.getElementById('page').value;
+       type = document.getElementById('type').value;
        document.querySelector("#send").addEventListener('click',getStatus);
     }
 

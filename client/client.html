@@ -5,7 +5,10 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-  <script type="text/babel">  
+  <script type="text/babel"> 
+  var page;
+  var type;
+
     const handleResponse = (xhr) => {
     	const content = document.querySelector("#content");
     	const obj = JSON.parse(xhr.response);
@@ -52,8 +55,8 @@
     };
 
     const init = () => {
-       var page = document.querySelector("#page").value;
-       var type = document.querySelector("#type").value;
+       page = document.querySelector("#page").value;
+       type = document.querySelector("#type").value;
        const sendButton = document.querySelector("#send");
        sendButton.onclick = () => sendAjax(page);
     };
